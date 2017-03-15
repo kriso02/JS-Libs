@@ -1,6 +1,6 @@
 ﻿Grid_Proto = function (sx, sy, cell_size) {
     ///<summary>The Grid prototype. Not to be use by its own</summary>
-    this.size = { x: sx, y: sy, cell: cell_size || 1 }
+    this.size = { x: sx, y: sy, cell : cell_size||1 }
 }
 
 Grid = function (sx, sy, initial_value) {
@@ -13,7 +13,7 @@ Grid = function (sx, sy, initial_value) {
     this.cells = []
     console.log(this.size)
 
-    for (let i = 0; i < this.size.x * this.size.y; i++) {
+    for (let i = 0; i < this.size.x*this.size.y; i++) {
         this.cells[i] = initial_value
     }
 }
@@ -27,7 +27,7 @@ UInt8ClampedGrid = function (sx, sy, cell_size) {
     ///<returns type="Grid">A grid with spesified size</returns>
     Grid_Proto.call(this, sx, sy, cell_size)
     this.cells = new Uint8ClampedArray(sx * sy * cell_size)
-
+    
 }
 UInt8ClampedGrid.prototype = new Grid_Proto()
 
@@ -45,7 +45,7 @@ Grid_Proto.prototype.get_cell = function (x, y, cell) {
     index = (x + this.size.x * y) * this.size.cell + cell || 0
     return this.cells[index]
 }
-Grid_Proto.prototype.set_cell = function (x, y, value, cell) {
+Grid_Proto.prototype.set_cell = function (x, y,value, cell) {
     ///<summary>Set value of a cell</summary>
     ///<param name="x" type="Number" integer="true">The x-coordinate of the cell</param>
     ///<param name="y" type="Number" integer="true">The y-coordinate of the cell</param>
@@ -56,20 +56,20 @@ Grid_Proto.prototype.set_cell = function (x, y, value, cell) {
     if (x < 0 || y > this.size.y || y < 0 || cell < 0 || cell > this.size.cell - 1)
         return undefined
     index = (x + this.size.x * y) * this.size.cell + cell || 0
-
+    
     console.log(index)
     this.cells[index] = value
     return this.cells[index]
 }
 Grid_Proto.prototype.dist = function (x1, y1, x2, y2) {
-    var x = x1 - x2
-    var y = y1 - y2
-    return Math.sqrt(x * x + y * y)
+        var x = x1 - x2
+        var y = y1 - y2
+        return Math.sqrt(x*x+y*y)
 }
 Grid_Proto.prototype.manhat = function (x1, y1, x2, y2) {
-    return Math.abs(x1 - x2) + Math.abs(y1 - y2)
+        return Math.abs(x1 - x2) + Math.abs(y1 - y2)
 }
 Grid_Proto.prototype.maxhat = function (x1, y1, x2, y2) {
-    return Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2))
+        return Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2))
 }
 
