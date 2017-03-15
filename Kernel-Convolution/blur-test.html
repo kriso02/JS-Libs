@@ -16,6 +16,7 @@
             border: 1px solid black;
             width:25px;
             height:25px;
+            
         }
 
         .colum {
@@ -41,6 +42,15 @@
             width:50%;
             text-align:center;
         }
+
+        .unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
     </style>
 </head>
 <body>
@@ -103,15 +113,13 @@
        new kernel(3,3)
 
 
-        var kgrid
-        var kernel_grid = [[0,1,0],[1,2,1],[0,1,0]]
-
+   
 
         function update_kernel() {
-            kgrid = document.getElementById("kgrid")
+            
             for (let x = 0; x < kgrid.children.length; x++) {
                 for (let y = 0; y < kgrid.children[x].children.length; y++) {
-                    kgrid.children[x].children[y].innerHTML = kernel_grid[x][y]
+                    
                 }
             }
         }
@@ -145,7 +153,12 @@
                     for (let y = 0; y < sy; y++) {
                         let cell = document.createElement("div")
                         cell.classList.add("cell")
-                        cell.innerHTML = this.kernel.get_cell(x,y)
+                        cell.classList.add("unselectable")
+                        cell.innerHTML = this.kernel.get_cell(x, y)
+                        cell.onclick = function (e) {
+                            console.log(e)
+                            e.target.innerHTML = (parseInt(e.target.innerHTML) + 1) %10
+                        }
                         colum.appendChild(cell)
                     }
                     kgrid.appendChild(colum)

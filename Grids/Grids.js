@@ -57,7 +57,7 @@ Grid_Proto.prototype.set_cell = function (x, y, value, cell) {
         return undefined
     index = (x + this.size.x * y) * this.size.cell + cell || 0
 
-    console.log(index)
+    
     this.cells[index] = value
     return this.cells[index]
 }
